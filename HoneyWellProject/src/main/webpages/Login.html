@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+<body>
+
+<div ng-app="Login" ng-submit="submitClicked()" ng-controller="LoginController">
+ <div ng-show="DisplayAuthenticate">
+ <form>
+    User Name: <input type="text" ng-model="username"><br>
+    <br>
+   Password: <input type="password" ng-model="password"><br>
+    <br>
+    <input type="submit">
+  </form>
+ </div>
+ <div ng-show="DisplayMovie">
+ <h2>Select movie</h2>
+  <select ng-model="selectedMovie" ng-options="x for x in movies">
+</select>
+<h2>Select SeatNumber</h2>
+  <select ng-model="selectedSeat" ng-options="x for x in searNumbers">
+</select>
+</div>
+
+</div>
+
+<script>
+var app = angular.module('Login', []);
+app.controller('LoginController', function($scope) {
+ $scope.DisplayAuthenticate=true;
+    $scope.submitClicked = function () {
+   		if($scope.password="honeywell")
+        {
+       		$scope.DisplayMovie=true;
+            $scope.DisplayAuthenticate=false;
+            $scope.movies = ["RRR", "Chirutha", "Lion","Titanic","Brother"];
+            $scope.searNumbers=[1,2,3,4,5,6,7,8,9,10];
+            $http.post('/saveDetails',$scope).success(function(data)
+            		{
+ 							if(data.success=="success")
+ 								{
+ 								
+ 								}
+            		})
+            		
+            
+        }
+  }
+});
+</script>
+
+</body>
+</html>
